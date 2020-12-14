@@ -1,0 +1,57 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+#include "variadic_functions.h"
+
+
+	tmp = va_arg(list, char *);
+
+	if (tmp == NULL)
+	{
+		printf("((nil))");
+		return;
+	}
+
+	printf("%s%s", str, tmp);
+}
+/**
+ * print_all - print string
+ * @format: string pointer
+ */
+void print_all(const char * const format, ...)
+{
+	tipos type[] = {
+		{"c", printchar},
+		{"i", printint},
+		{"f", printfloat},
+		{"s", printstring},
+		{NULL, NULL}
+	};
+
+	int y, j;
+	va_list list;
+	char *str;
+
+	va_start(list, format);
+	str = "";
+	y = 0;
+	j = 0;
+	while (format && format[y])
+	{
+		while (j < 4)
+		{
+			if (type[j].car[0] == format[y])
+			{
+				type[j].f(str, list);
+				str = ", ";
+				break;
+			}
+			j++;
+		}
+		y++;
+		j = 0;
+	}
+
+	printf("\n");
+	va_end(list);
+}
