@@ -2,7 +2,7 @@
 
 /**
  * delete_dnodeint_at_index - deletes a node at index.
- * @h: head of the list
+ * @head: head of the list
  * @index: index
  * Return: 1 if it succeeded, -1 if it failed
  */
